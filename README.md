@@ -1,4 +1,3 @@
-````markdown
 # 🌐 Despliegue automático de sitio web estático con Kubernetes + Minikube
 
 Este repositorio contiene los manifiestos necesarios para desplegar automáticamente un sitio web estático en un clúster local de Kubernetes usando Minikube. El despliegue se automatiza completamente con un script Bash.
