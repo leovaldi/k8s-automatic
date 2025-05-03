@@ -1,11 +1,9 @@
-
----
-
 ````markdown
 # 🚀 Script de Despliegue Kubernetes con Minikube
 
 Este script (`deploy.sh`) automatiza el despliegue de un entorno Kubernetes local usando Minikube y Docker. Clona los repositorios necesarios, aplica manifiestos y abre automáticamente el servicio en el navegador.
 
+---
 ---
 
 ## 📋 Requisitos previos
