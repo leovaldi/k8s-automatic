@@ -26,16 +26,6 @@ Asegúrate de tener instalados los siguientes programas:
    ```bash
    chmod +x deploy.sh
 
-## 🚀 Despliegue automático
-
-1. Abre una terminal.  
-2. Clona este repositorio o descarga el script `deploy.sh`.  
-3. Da permisos de ejecución al script si es necesario:
-
-   ```bash
-   chmod +x deploy.sh
-````
-
 4. Ejecutá el script:
 
    ```bash
