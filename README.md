@@ -25,27 +25,6 @@ Asegúrate de tener instalados los siguientes programas:
 
    ```bash
    chmod +x deploy.sh
-Claro, acá tenés el README completo y corregido, listo para **copiar y pegar** en GitHub sin errores de formato:
-
-````markdown
-# 🌐 Despliegue automático de sitio web estático con Kubernetes + Minikube
-
-Este repositorio contiene los manifiestos necesarios para desplegar automáticamente un sitio web estático en un clúster local de Kubernetes usando Minikube. El despliegue se automatiza completamente con un script Bash.
-
----
-
-## ✅ Requisitos previos
-
-Asegúrate de tener instalados los siguientes programas:
-
-- Git  
-- Docker  
-- Minikube (1.24.x o superior)  
-- Kubectl (1.21.x o superior)  
-
-> 💡 Nota: Si usás `--driver=docker`, Docker debe estar corriendo antes de iniciar Minikube.
-
----
 
 ## 🚀 Despliegue automático
 
