@@ -1,4 +1,3 @@
-
 ````markdown
 # 🚀 Script de Despliegue Kubernetes con Minikube
 
@@ -120,8 +119,3 @@ k8s-manifiestos/
 Leonel Valdivia – [GitHub](https://github.com/Leovaldi)
 
 ---
-
-```
-
-¿Querés que también te genere una versión en inglés o preferís mantenerlo solo en español?
-```
