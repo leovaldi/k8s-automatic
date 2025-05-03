@@ -8,10 +8,10 @@ Este repositorio contiene los manifiestos necesarios para desplegar automáticam
 
 Asegúrate de tener instalados los siguientes programas:
 
-- Git
-- Docker
-- Minikube (1.24.x o superior)
-- Kubectl (1.21.x o superior)
+- Git  
+- Docker  
+- Minikube (1.24.x o superior)  
+- Kubectl (1.21.x o superior)  
 
 > 💡 Nota: Si usás `--driver=docker`, Docker debe estar corriendo antes de iniciar Minikube.
 
@@ -19,9 +19,40 @@ Asegúrate de tener instalados los siguientes programas:
 
 ## 🚀 Despliegue automático
 
-1. Abre una terminal.
-2. Clona este repositorio o descarga el script `deploy.sh`.
+1. Abre una terminal.  
+2. Clona este repositorio o descarga el script `deploy.sh`.  
 3. Da permisos de ejecución al script si es necesario:
+
+   ```bash
+   chmod +x deploy.sh
+Claro, acá tenés el README completo y corregido, listo para **copiar y pegar** en GitHub sin errores de formato:
+
+````markdown
+# 🌐 Despliegue automático de sitio web estático con Kubernetes + Minikube
+
+Este repositorio contiene los manifiestos necesarios para desplegar automáticamente un sitio web estático en un clúster local de Kubernetes usando Minikube. El despliegue se automatiza completamente con un script Bash.
+
+---
+
+## ✅ Requisitos previos
+
+Asegúrate de tener instalados los siguientes programas:
+
+- Git  
+- Docker  
+- Minikube (1.24.x o superior)  
+- Kubectl (1.21.x o superior)  
+
+> 💡 Nota: Si usás `--driver=docker`, Docker debe estar corriendo antes de iniciar Minikube.
+
+---
+
+## 🚀 Despliegue automático
+
+1. Abre una terminal.  
+2. Clona este repositorio o descarga el script `deploy.sh`.  
+3. Da permisos de ejecución al script si es necesario:
+
    ```bash
    chmod +x deploy.sh
 ````
@@ -45,10 +76,10 @@ Este script:
 * Abre el sitio web automáticamente en el navegador.
 
 > 🧭 Si el navegador **no se abre automáticamente**, podés abrir manualmente la URL ejecutando:
-
-```bash
-minikube service static-site-service --url
-```
+>
+> ```bash
+> minikube service static-site-service --url
+> ```
 
 ---
 
@@ -82,12 +113,15 @@ El sitio se monta desde la carpeta `static-website` al path `/mnt/web` en el con
 Si algo falla:
 
 * Asegurate de tener Docker corriendo.
+
 * Verifica los permisos de ejecución.
+
 * Podés consultar los logs del pod con:
 
   ```bash
   kubectl logs <nombre-del-pod>
   ```
+
 * Ingresar al contenedor:
 
   ```bash
@@ -99,4 +133,4 @@ Si algo falla:
 
 📌 Proyecto de [Leovaldi](https://github.com/Leovaldi)
 
-
+```
