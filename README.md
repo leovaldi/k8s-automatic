@@ -1,6 +1,3 @@
-
----
-
 ````markdown
 # 🌐 Despliegue automático de sitio web estático con Kubernetes + Minikube
 
