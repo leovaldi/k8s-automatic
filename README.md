@@ -1,122 +1,106 @@
+
+---
+
 ````markdown
-# 🚀 Script de Despliegue Kubernetes con Minikube
+# 🌐 Despliegue automático de sitio web estático con Kubernetes + Minikube
 
-Este script (`deploy.sh`) automatiza el despliegue de un entorno Kubernetes local usando Minikube y Docker. Clona los repositorios necesarios, aplica manifiestos y abre automáticamente el servicio en el navegador.
-
----
----
-
-## 📋 Requisitos previos
-
-Antes de ejecutar el script, asegurate de tener instalado y funcionando:
-
-### 🔧 Herramientas necesarias
-
-| Herramienta         | Recomendación / Versión mínima |
-|---------------------|-------------------------------|
-| [Docker](https://www.docker.com/)             | ✅ Docker Desktop corriendo |
-| [Minikube](https://minikube.sigs.k8s.io/docs/start/)          | ✅ v1.30 o superior |
-| [kubectl](https://kubernetes.io/docs/tasks/tools/)            | ✅ v1.26 o superior |
-| [Git](https://git-scm.com/)                 | ✅ para clonar repositorios |
-| Bash (Linux/macOS o Git Bash en Windows) | ✅ Necesario para ejecutar el script |
-
-> ⚠️ En **Windows**, se recomienda ejecutar este script desde **Git Bash** y tener **Docker Desktop activo** con el backend WSL2 o Hyper-V configurado correctamente.
+Este repositorio contiene los manifiestos necesarios para desplegar automáticamente un sitio web estático en un clúster local de Kubernetes usando Minikube. El despliegue se automatiza completamente con un script Bash.
 
 ---
 
-## 📦 ¿Qué hace el script?
+## ✅ Requisitos previos
 
-1. Verifica que Docker esté instalado y en ejecución.
-2. Inicia Minikube con driver Docker.
-3. Clona dos repositorios:
-   - Uno con manifiestos Kubernetes.
-   - Uno con una página estática para desplegar.
-4. Aplica los manifiestos (deployments, PVCs, services).
-5. Espera a que los Pods estén listos.
-6. Verifica permisos y contenido del contenedor `nginx`.
-7. Abre automáticamente el servicio expuesto en tu navegador.
+Asegúrate de tener instalados los siguientes programas:
+
+- Git
+- Docker
+- Minikube (1.24.x o superior)
+- Kubectl (1.21.x o superior)
+
+> 💡 Nota: Si usás `--driver=docker`, Docker debe estar corriendo antes de iniciar Minikube.
 
 ---
 
-## 🚀 Ejecución
+## 🚀 Despliegue automático
 
-1. Cloná este repositorio o guardá el script `deploy.sh`.
-
-2. Asigná permisos de ejecución al script:
-
-```bash
-chmod +x deploy.sh
+1. Abre una terminal.
+2. Clona este repositorio o descarga el script `deploy.sh`.
+3. Da permisos de ejecución al script si es necesario:
+   ```bash
+   chmod +x deploy.sh
 ````
 
-3. Ejecutalo:
+4. Ejecutá el script:
+
+   ```bash
+   ./deploy.sh
+   ```
+
+Este script:
+
+* Verifica las herramientas necesarias.
+* Clona automáticamente los repositorios:
+
+  * [`static-website`](https://github.com/Leovaldi/static-website)
+  * [`k8s-manifiestos`](https://github.com/Leovaldi/k8s-manifiestos)
+* Inicia Minikube montando el sitio web.
+* Aplica los manifiestos Kubernetes.
+* Espera a que el pod esté en estado `Running`.
+* Abre el sitio web automáticamente en el navegador.
+
+> 🧭 Si el navegador **no se abre automáticamente**, podés abrir manualmente la URL ejecutando:
 
 ```bash
-./deploy.sh
+minikube service static-site-service --url
 ```
 
 ---
 
-## 🌐 Acceso a la página desplegada
-
-El script detecta automáticamente un servicio tipo `NodePort` o `LoadBalancer`, y:
-
-* Abre el servicio directamente usando `minikube service ...`.
-* Te muestra una URL alternativa con la IP y puerto de Minikube en caso de que falle.
-
----
-
-## 🧪 Verificación manual (opcional)
-
-Si querés verificar manualmente:
-
-```bash
-kubectl get pods
-kubectl get svc
-minikube ip
-```
-
----
-
-## ❓ Problemas comunes
-
-* `❌ Docker no está instalado o no está en el PATH` → Instalá Docker y asegurate que esté corriendo.
-* `❌ El pod app=static-site no se encuentra` → Verificá que el manifiesto tenga la etiqueta correcta.
-* `❌ El servicio no tiene endpoints disponibles` → Asegurate de que los pods estén conectados al servicio.
-* `❌ error validating "/etc/kubernetes/...": dial tcp [::1]:8443: connect: connection refused` → Minikube no pudo levantar el API server. Recomendado:
-
-  ```bash
-  minikube delete
-  minikube start --driver=docker
-  ```
-
----
-
-## 🧼 Limpieza (opcional)
-
-Para eliminar todo lo creado:
-
-```bash
-minikube delete
-```
-
----
-
-## 📁 Estructura esperada del repositorio de manifiestos
-
-El repositorio `k8s-manifiestos` debe tener una estructura como esta:
+## 📁 Estructura esperada del repositorio
 
 ```
 k8s-manifiestos/
 ├── deployments/
-├── services/
+│   └── static-site-deployment.yaml
+├── ingress/             # (vacío en esta versión)
 ├── pv/
-└── pvc/
+│   └── static-site-pv.yaml
+├── pvc/
+│   └── static-site-pvc.yaml
+├── services/
+│   └── static-site-service.yaml
+├── deploy.sh            # Script de automatización
+├── README.md
 ```
 
 ---
 
-## ✍️ Autor
+## ✅ Sitio montado
 
-Leonel Valdivia – [GitHub](https://github.com/Leovaldi)
+El sitio se monta desde la carpeta `static-website` al path `/mnt/web` en el contenedor, y se expone mediante Nginx automáticamente.
 
 ---
+
+## 🛠️ Troubleshooting
+
+Si algo falla:
+
+* Asegurate de tener Docker corriendo.
+* Verifica los permisos de ejecución.
+* Podés consultar los logs del pod con:
+
+  ```bash
+  kubectl logs <nombre-del-pod>
+  ```
+* Ingresar al contenedor:
+
+  ```bash
+  kubectl exec -it <nombre-del-pod> -- /bin/bash
+  ls /usr/share/nginx/html
+  ```
+
+---
+
+📌 Proyecto de [Leovaldi](https://github.com/Leovaldi)
+
+```
